@@ -12,3 +12,9 @@ export const createTask= async(title: string, description:string)=>{
     );
     return result.rows[0];
 };
+export const createTask1= async(title: string, description:string)=>{
+    const result =await pool.query(
+        "insert into tasks(title, description) values ($1,$2) returning*", [title,description]
+    );
+    return result.rows[0];
+};
