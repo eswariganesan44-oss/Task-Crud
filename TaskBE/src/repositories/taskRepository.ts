@@ -12,3 +12,16 @@ export const createTask= async(title: string, description:string)=>{
     );
     return result.rows[0];
 };
+
+export const updateTask = async (id: number, status: string)=>{
+    const result = await pool.query(
+        "UPDATE tasks SET status=$1 WHERE id=$2 RETURNING*",
+        [status, id]
+    );
+    return result.rows[0];
+};
+
+export const deleteTask = async (id:number) => {
+    await pool.query("DELETE FROM tasks WHERE id=$1",[id]);   
+};
+
